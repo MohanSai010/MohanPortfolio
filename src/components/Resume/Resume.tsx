@@ -7,7 +7,7 @@ const skills = [
   'React/React Native',
   'TypeScript',
   'Node.js',
-  'GraphQL',
+  'SQL',
   'MongoDB',
   'AWS',
   'Docker',

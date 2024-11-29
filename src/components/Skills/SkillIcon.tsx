@@ -14,7 +14,7 @@ const iconMap = {
   'React/React Native': Code2,
   'TypeScript': Code2,
   'Node.js': Server,
-  'GraphQL': Database,
+  'SQL': Database,
   'MongoDB': Database,
   'AWS': Globe,
   'Docker': Blocks,
