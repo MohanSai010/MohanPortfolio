@@ -41,12 +41,19 @@ export function Header() {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
           </div>
         </div>
@@ -65,6 +72,9 @@ export function Header() {
                   {item.label}
                 </a>
               ))}
+
+              {/* Mobile Theme Toggle */}
+              
             </div>
           </div>
         )}

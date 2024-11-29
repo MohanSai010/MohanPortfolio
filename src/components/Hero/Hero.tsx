@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Twitter, Mail, Download } from 'lucide-react';
 
 export function Hero() {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  const roles = [
+    'Web Developer', 
+    'App Developer', 
+    'React Developer'
+    
+  ];
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const i = loopNum % roles.length;
+      const fullText = roles[i];
+
+      setText(current => {
+        if (!isDeleting) {
+          // Typing
+          if (current.length === fullText.length) {
+            // Pause before deleting
+            setTimeout(() => setIsDeleting(true), 2000);
+            return current;
+          }
+          return fullText.substring(0, current.length + 1);
+        } else {
+          // Deleting
+          if (current.length === 0) {
+            setIsDeleting(false);
+            setLoopNum(prev => prev + 1);
+            return '';
+          }
+          return current.substring(0, current.length - 1);
+        }
+      });
+    };
+
+    const timer = setTimeout(handleTyping, isDeleting ? 50 : typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
+
   return (
     <section id="home" className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-6">
@@ -10,8 +52,12 @@ export function Hero() {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Hi, I'm <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">Mohan Sai</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
-              A passionate React, Web, and App Developer crafting beautiful digital experiences
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 min-h-[1.5em]">
+              A passionate{' '}
+              <span className="font-bold text-purple-600 dark:text-purple-400">
+                {text}
+                <span className="animate-pulse">|</span>
+              </span>
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <a
@@ -31,23 +77,23 @@ export function Hero() {
               </a>
             </div>
             <div className="flex gap-6 mt-8 justify-center md:justify-start">
-              <a 
-                href="https://github.com/MohanSai010" 
+              <a
+                href="https://github.com/MohanSai010"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
               >
                 <Github size={24} />
               </a>
-              <a 
+              <a
                 href="https://www.linkedin.com/in/d-mohan-sai-kumar-08aa97260/"
                 target="_blank"
-                rel="noopener noreferrer" 
+                rel="noopener noreferrer"
                 className="text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
               >
                 <Linkedin size={24} />
               </a>
-              <a 
+              <a
                 href="https://x.com/DMohansaikumar"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -55,7 +101,7 @@ export function Hero() {
               >
                 <Twitter size={24} />
               </a>
-              <a 
+              <a
                 href="mailto:dmohansaikumar@gmail.com"
                 className="text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
               >
