@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Twitter, Mail, Download } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Download, Code } from 'lucide-react';
 
 export function Hero() {
   const [text, setText] = useState('');
@@ -7,32 +7,24 @@ export function Hero() {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const roles = [
-    'Web Developer', 
-    'App Developer', 
-    'React Developer'
-    
-  ];
+  const roles = ['Web Developer', 'App Developer', 'React Developer'];
 
   useEffect(() => {
     const handleTyping = () => {
       const i = loopNum % roles.length;
       const fullText = roles[i];
 
-      setText(current => {
+      setText((current) => {
         if (!isDeleting) {
-          // Typing
           if (current.length === fullText.length) {
-            // Pause before deleting
             setTimeout(() => setIsDeleting(true), 2000);
             return current;
           }
           return fullText.substring(0, current.length + 1);
         } else {
-          // Deleting
           if (current.length === 0) {
             setIsDeleting(false);
-            setLoopNum(prev => prev + 1);
+            setLoopNum((prev) => prev + 1);
             return '';
           }
           return current.substring(0, current.length - 1);
@@ -45,12 +37,18 @@ export function Hero() {
   }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <section
+      id="home"
+      className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800"
+    >
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Hi, I'm <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">Mohan Sai</span>
+              Hi, I'm{' '}
+              <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+                Mohan Sai
+              </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 min-h-[1.5em]">
               A passionate{' '}
@@ -106,6 +104,14 @@ export function Hero() {
                 className="text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
               >
                 <Mail size={24} />
+              </a>
+              <a
+                href="https://leetcode.com/u/kR9WR8P5FW/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
+              >
+                <Code size={24} />
               </a>
             </div>
           </div>
